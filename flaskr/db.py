@@ -25,7 +25,7 @@ from flask.cli import with_appcontext
 def get_db():
     if 'db' not in g:
         g.db = sqlite3.connect(
-            current_ap.config['DATABASE'],
+            current_app.config['DATABASE'],
             detect_types=sqlite3.PARSE_DECLTYPES
         )
         
@@ -76,7 +76,7 @@ def init_db_command():
 def init_app(app):
     #tell flask to call that function when cleaning up after
     #returning the response
-    app.teardown_appcontect(close_db)
+    app.teardown_appcontext(close_db)
     #adds a new command that can be called with the flask command
     app.cli.add_command(init_db_command)
-    
+
