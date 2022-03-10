@@ -1,0 +1,26 @@
+{% extends 'base.jinja' %}
+
+{% block header %}
+    <h1>{% block title %} Register{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        <label for="username">Username</label>
+        <input name="username" id="username" required>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+        <input type="submit" value="Register">
+  </form>
+{% endblock %}
+
+<!-- all of the rendered content must appear inside {% block %} tags that 
+     override blocks from the base template.
+
+     Note how 'block title' is placed inside 'block header'. This will set the
+     title block and then output the value of it into the header block. So
+     both the window and page share the same title without writing it twice.
+
+     It is important to always fully validate the data on the server, even if 
+     the client does some validation as well.
+-->
