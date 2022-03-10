@@ -22,3 +22,24 @@
     {% endfor %}
     {% block content %}{% endblock %}
 </section>
+
+<!-- g is automatically available in templates. Based on if g.user is set
+  from load_logged_in_user, either the username and a log out link are displayed
+  or links to register and log in.
+
+  url_for() is automatically available also, and is used to generate URLs to view
+  instead of writing them out manually.
+
+  After the page title, and before the content, the template loops over each message
+  returned by get_flash_messages(). You use flash() in the views to show error messages,
+  and this is the code that will display them.
+
+  Three blocks in this file will be overidden in other templates:
+    1. {% block title %} will change the title displayed in the browser's tab and 
+            window title.
+    
+    2. {% block header %} is similar to title but will change the title displayed on the page.
+
+    3. {% block content %} is where the content of each page goes, such as the login form or a
+            blog post.
+-->
