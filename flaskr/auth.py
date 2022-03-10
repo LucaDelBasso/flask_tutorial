@@ -17,4 +17,6 @@ bp = Blueprint('auth', __name__ , url_prefix='/auth')
     blueprint needs to know where it is defined, so __name__ is passed as
     the second argument. the url_prefix will be prepended to all the URLs
     associated with the blueprint.
+
+    The auth bp will have views to register new users and to log in and out.
 '''
