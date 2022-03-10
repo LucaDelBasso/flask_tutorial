@@ -18,6 +18,7 @@ def create_app(test_config=None):
         and the database file.
     
     '''
+    print("NAME!:" , __name__)
 
     app.config.from_mapping(
         SECRET_KEY='DEV',
