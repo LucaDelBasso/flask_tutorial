@@ -73,3 +73,46 @@ def register():
         flash(error)
     return render_template('auth/register.html')
 
+@bp.route('/login', methods=('GET', 'POST'))
+def login():
+    ''' 
+        The user is queried first and stored in a variable for later use.
+
+        fetchone() returns one row from the query. None is returned if there
+        are no results.
+
+        check_password_hash() hashes the submitted password in the same way as 
+        stored and compares them.
+
+        session is a duct that stores data across reqeusts. When validation 
+        succeeds, the user's id is stored in a new sesion. The data is stored 
+        in a cookie that is sent to the browser, and the browser then sends it back
+        with the subsequent request. Flask securly signs the data so it cant be
+        tampered with.
+    '''
+
+    if request.method == "POST":
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db()
+        error = None
+        user = db.execute(
+            'SELECT * FROM user WHERE username = ?', (username,)
+        ).fetchone()
+
+        if user is None:
+            error = 'Incorrect username.'
+        elif not check_password_hash(user['password'], password):
+            error = 'Incorrect password.'
+    
+        if error is None:
+            session.clear()
+            #store user_id in the sesson, it will now be available on
+            #subsequent requests. 
+            session['user_id'] = user['id']
+            #if a user is logged in, their info should be loaded and made
+            #available to other views.
+            return redirect(url_for('index'))
+
+        flash(error)
+    return render_template('auth/login.html')
