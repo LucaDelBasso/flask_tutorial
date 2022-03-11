@@ -103,7 +103,7 @@ def test_update(client, auth, app):
 ))
 def test_create_update_validate(client, auth, path):
     auth.login()
-    respones = client.post(path, data={'title': '', 'body': ''})
+    response = client.post(path, data={'title': '', 'body': ''})
     assert b'Title is required.' in response.data
 
 
@@ -122,4 +122,3 @@ def test_delete(client, auth, app):
         post = db.execute('SELECT * FROM post WHERE id = 1').fetchone()
         assert post is None
 
-        

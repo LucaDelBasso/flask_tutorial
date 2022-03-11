@@ -56,13 +56,13 @@ def create_app(test_config=None):
         app.config.from_mapping(test_config)
     
     #esnure the instance folder exists
+    '''
+        this ensures that app.instance_path exists. Flask doesn't create
+        the instance folder automatically, but it needs to be created because
+        the project will create the SQLite db file there
+    '''
     try:
         os.makedirs(app.instance_path)
-        '''
-            this ensures that app.instance_path exists. Flask doesn't create
-            the instance folder automatically, but it needs to be created because
-            the project will create the SQLite db file there
-        '''
     except OSError:
         pass
 
